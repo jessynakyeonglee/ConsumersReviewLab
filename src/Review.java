@@ -160,4 +160,8 @@ public class Review {
       return randomNegativeAdj();
     }
   }
+  public static double totalSentiment(String fileName){
+    int counter=0;
+    while (textToString(26WestReview))
+  }
 }
