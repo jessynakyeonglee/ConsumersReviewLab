@@ -160,8 +160,18 @@ public class Review {
       return randomNegativeAdj();
     }
   }
-  public static double totalSentiment(String fileName){
-    int counter=0;
-    while (textToString(26WestReview))
+  public static double totalSentiment(String filename){
+    double output=0;
+    String space = " ";
+    String testString = textToString(filename);
+    testString=removePunctuation(testString);
+    int count = 0;
+    while (count<testString.length()){
+      String temporarystring=testString;
+      output+=sentimentVal(temporarystring.substring(count,(temporarystring.indexOf(space))));
+      count+=testString.indexOf(space)+1;
+      temporarystring=temporarystring.substring(count);
+    }
+    return output;
   }
 }
