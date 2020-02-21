@@ -161,17 +161,20 @@ public class Review {
     }
   }
   public static double totalSentiment(String filename){
-    double output=0;
+    double output=0.0;
     String space = " ";
     String testString = textToString(filename);
     testString=removePunctuation(testString);
     int count = 0;
-    while (count<testString.length()){
-      String temporarystring=testString;
-      output+=sentimentVal(temporarystring.substring(count,(temporarystring.indexOf(space))));
-      count+=testString.indexOf(space)+1;
+    String temporarystring=testString;
+    int findspace=temporarystring.indexOf(space);
+    while (findspace!=-1){
+      output+=sentimentVal(temporarystring.substring(count,findspace));
+      count+=findspace+1;
       temporarystring=temporarystring.substring(count);
-    }
+      }
+    output+=sentimentVal(temporarystring.substring(count));
+
     return output;
   }
 }
