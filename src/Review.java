@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.File;
 import java.util.HashMap;
@@ -160,21 +161,20 @@ public class Review {
       return randomNegativeAdj();
     }
   }
-  public static double totalSentiment(String filename){
+  public static double totalSentiment(String filename) throws FileNotFoundException {
     double output=0.0;
     String space = " ";
-    String testString = textToString(filename);
-    testString=removePunctuation(testString);
-    int count = 0;
-    String temporarystring=testString;
-    int findspace=temporarystring.indexOf(space);
-    while (findspace!=-1){
-      output+=sentimentVal(temporarystring.substring(count,findspace));
-      count+=findspace+1;
-      temporarystring=temporarystring.substring(count);
+    String temporarystring = textToString(filename)+" ";
+    int starting = 0;
+    while (starting<temporarystring.length()){
+      int ending=temporarystring.indexOf(space);
+      String testword=removePunctuation((temporarystring.substring(starting,ending)).toLowerCase());
+      output+=sentimentVal(testword);
+      temporarystring=temporarystring.substring(ending+1);
       }
-    output+=sentimentVal(temporarystring.substring(count));
+    output+=sentimentVal(temporarystring);
 
     return output;
   }
+
 }
